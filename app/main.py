@@ -4,6 +4,9 @@ from starlette.middleware.cors import CORSMiddleware
 from app.api.endpoints import api_router
 from app.core.config import settings
 
+import app.pre_start as ps
+import app.initial_data as id
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description=settings.PROJECT_DESCRIPTION,
@@ -23,3 +26,6 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+# ps.main()
+# id.main()

@@ -37,11 +37,12 @@ class Settings(BaseConfig):
 
     # Database
     MYSQL_SERVER: str = os.getenv("MYSQL_SERVER")
+    MYSQL_PORT: str = os.getenv("MYSQL_PORT")
     MYSQL_USER: str = os.getenv("MYSQL_USER")
     MYSQL_PASSWORD: str = os.getenv("MYSQL_PASSWORD")
     MYSQL_DB: str = os.getenv("MYSQL_DB")
     SQLALCHEMY_DATABASE_URI: Optional[
-        str] = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_SERVER}/{MYSQL_DB}"
+        str] = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_SERVER}:{MYSQL_PORT}/{MYSQL_DB}"
 
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
@@ -52,9 +53,10 @@ class Settings(BaseConfig):
         db_user = values.get("MYSQL_USER"),
         db_password = values.get("MYSQL_PASSWORD"),
         db_host = values.get("MYSQL_SERVER"),
+        db_port = values.get("MYSQL_PORT")
         db_database = values.get("MYSQL_DB") or "",
 
-        return f"{db_drivername}://{db_user}:{db_password}@{db_host}/{db_database}"
+        return f"{db_drivername}://{db_user}:{db_password}@{db_host}:{db_port}/{db_database}"
 
     FIRST_SUPERUSER: str = "admin"
     FIRST_SUPERUSER_PASSWORD: str = "admin"
