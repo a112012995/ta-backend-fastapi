@@ -22,7 +22,7 @@ services:
       - MYSQL_DB=ta-db
       - BACKEND_CORS_ORIGINS=["*", "http://localhost", "http://localhost:4200", "http://localhost:3000", "http://localhost:8080"]
     depends_on:
-      - ta-be
+      - ta-db
 
 volumes:
   mysql:
