@@ -25,8 +25,8 @@ target_metadata = Base.metadata
 
 def get_url() -> str:
     user = os.getenv("MYSQL_USER", "root")
-    password = os.getenv("MYSQL_PASSWORD", "notfound")
-    server = os.getenv("MYSQL_SERVER", "localhost")
+    password = os.getenv("MYSQL_PASSWORD", "password")
+    server = os.getenv("MYSQL_SERVER", "127.0.0.1")
     db = os.getenv("MYSQL_DB", "ta-db")
     # Use mysql+pymysql driver
     return f"mysql+pymysql://{user}:{password}@{server}/{db}"
