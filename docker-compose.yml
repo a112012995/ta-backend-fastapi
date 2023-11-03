@@ -1,14 +1,5 @@
 version: "3.8"
 services:
-  ta-db:
-    image: mysql:5.7
-    container_name: ta-db
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: ta-db
-    volumes:
-      - mysql_data:/var/lib/mysql
-
   ta-be:
     image: ta-be
     container_name: ta-be
@@ -21,8 +12,3 @@ services:
       - MYSQL_PASSWORD=password
       - MYSQL_DB=ta-db
       - BACKEND_CORS_ORIGINS=["*", "http://localhost", "http://localhost:4200", "http://localhost:3000", "http://localhost:8080"]
-    depends_on:
-      - ta-db
-
-volumes:
-  mysql:
