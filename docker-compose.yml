@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  sdkpt-ml:
+    image: sdkpt-ml # Replace with the actual image name or image path
+    container_name: sdkpt-ml
+    ports:
+      - "8000:8000"
+    environment:
+      - MYSQL_SERVER=localhost
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=notfound
+      - MYSQL_DB=ta-db
+      - BACKEND_CORS_ORIGINS=["*", "http://localhost", "http://localhost:4200", "http://localhost:3000", "http://localhost:8080"]

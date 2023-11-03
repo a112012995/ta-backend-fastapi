@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "ta-backend-fastapi"
+version = "0.1.0"
+description = "Backend app using FastAPI"
+authors = ["Ahmad Fajar Kusumajati <fajarku26@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.0"
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
+sqlalchemy = "^2.0.22"
+passlib = "^1.7.4"
+python-jose = "^3.3.0"
+alembic = "^1.12.1"
+pymysql = "^1.1.0"
+python-multipart = "^0.0.6"
+bcrypt = "^4.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

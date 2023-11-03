@@ -1,0 +1,11 @@
+# python
+__pycache__/
+
+# environment
+*.env
+
+# macos
+.DS_Store
+
+# folders
+dataprep/
