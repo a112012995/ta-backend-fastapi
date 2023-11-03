@@ -17,5 +17,12 @@ COPY . /app/
 # Expose the port your FastAPI app will run on
 EXPOSE 8000
 
+# Install Alembic and create an Alembic configuration file
+RUN pip install --no-cache-dir alembic
+COPY alembic.ini /app/alembic.ini
+
+# Run Alembic migrations
+RUN alembic upgrade head
+
 # Start the FastAPI application
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

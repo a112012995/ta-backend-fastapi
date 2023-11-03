@@ -4,7 +4,7 @@
 python3 /app/pre_start.py
 
 # Run migrations
-alembic upgrade head
+alembic upgrade heads
 
 # Create initial data in DB
 python3 /app/initial_data.py
