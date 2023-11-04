@@ -11,7 +11,7 @@ from app.core.config import settings
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.User])
+@router.get("/users", response_model=List[schemas.User])
 def read_users(
     db: Session = Depends(deps.get_db),
     skip: int = 0,
@@ -25,7 +25,7 @@ def read_users(
     return users
 
 
-@router.post("/", response_model=schemas.User)
+@router.post("/users", response_model=schemas.User)
 def create_user(
     *,
     db: Session = Depends(deps.get_db),
@@ -47,7 +47,18 @@ def create_user(
     return user
 
 
-@router.put("/me", response_model=schemas.User)
+@router.get("/users/me", response_model=schemas.User)
+def read_user_me(
+    db: Session = Depends(deps.get_db),
+    current_user: models.User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Get current user.
+    """
+    return current_user
+
+
+@router.put("/users/me", response_model=schemas.User)
 def update_user_me(
     *,
     db: Session = Depends(deps.get_db),
@@ -68,40 +79,29 @@ def update_user_me(
     return user
 
 
-@router.get("/me", response_model=schemas.User)
-def read_user_me(
-    db: Session = Depends(deps.get_db),
-    current_user: models.User = Depends(deps.get_current_user),
-) -> Any:
-    """
-    Get current user.
-    """
-    return current_user
+# @router.post("/open", response_model=schemas.User)
+# def create_user_open(
+#     *,
+#     db: Session = Depends(deps.get_db),
+#     password: str = Body(...),
+#     username: str = Body(...),
+# ) -> Any:
+#     """
+#     Create new user without the need to be logged in.
+#     """
+#     user = controllers.user.get_by_username(db, username=username)
+#     if user:
+#         raise HTTPException(
+#             status_code=400,
+#             detail="The user with this username already exists in the system",
+#         )
+#     user_in = schemas.UserCreate(
+#         password=password, username=username)
+#     user = controllers.user.create(db, obj_in=user_in)
+#     return user
 
 
-@router.post("/open", response_model=schemas.User)
-def create_user_open(
-    *,
-    db: Session = Depends(deps.get_db),
-    password: str = Body(...),
-    username: str = Body(...),
-) -> Any:
-    """
-    Create new user without the need to be logged in.
-    """
-    user = controllers.user.get_by_username(db, username=username)
-    if user:
-        raise HTTPException(
-            status_code=400,
-            detail="The user with this username already exists in the system",
-        )
-    user_in = schemas.UserCreate(
-        password=password, username=username)
-    user = controllers.user.create(db, obj_in=user_in)
-    return user
-
-
-@router.get("/{user_id}", response_model=schemas.User)
+@router.get("/users/{user_id}", response_model=schemas.User)
 def read_user_by_id(
     user_id: int,
     current_user: models.User = Depends(deps.get_current_user),
@@ -120,7 +120,7 @@ def read_user_by_id(
     return user
 
 
-@router.put("/{user_id}", response_model=schemas.User)
+@router.put("/users/{user_id}", response_model=schemas.User)
 def update_user(
     *,
     db: Session = Depends(deps.get_db),
