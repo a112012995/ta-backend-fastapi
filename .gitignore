@@ -13,3 +13,6 @@ dataprep/
 
 # scripts
 *.sh
+
+# alembic
+alembic/versions/
