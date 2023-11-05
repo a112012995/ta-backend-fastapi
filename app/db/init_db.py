@@ -14,6 +14,6 @@ def init_db(db: Session) -> None:
             username=settings.FIRST_SUPERUSER,
             password=settings.FIRST_SUPERUSER_PASSWORD,
             is_super=True,
-            # puskesmas_id=0,
+            puskesmas_id=settings.FIRST_SUPERUSER_PUSKESMAS_ID,
         )
         user = controllers.user.create(db, obj_in=user_in)

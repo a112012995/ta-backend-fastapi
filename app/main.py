@@ -6,6 +6,8 @@ from app.core.config import settings
 
 # import app.pre_start as ps
 # import app.initial_data as id
+# ps.main()
+# id.main()
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -26,6 +28,3 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
-
-# ps.main()
-# id.main()

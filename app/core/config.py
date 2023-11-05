@@ -60,6 +60,7 @@ class Settings(BaseConfig):
 
     FIRST_SUPERUSER: str = "admin"
     FIRST_SUPERUSER_PASSWORD: str = "admin"
+    FIRST_SUPERUSER_PUSKESMAS_ID: int = 0
 
     class Config:
         case_sensitive = True

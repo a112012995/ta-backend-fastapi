@@ -1,8 +1,8 @@
 """create user and puskesmas models
 
-Revision ID: c814277ae3e5
+Revision ID: 5e345f41500a
 Revises: 
-Create Date: 2023-11-03 11:57:07.142450
+Create Date: 2023-11-05 01:54:48.367726
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c814277ae3e5'
+revision: str = '5e345f41500a'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None

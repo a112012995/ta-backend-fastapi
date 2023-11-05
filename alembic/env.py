@@ -1,9 +1,14 @@
 import os
-from logging.config import fileConfig
-from alembic import context
-from sqlalchemy import engine_from_config
+from app.db.base import Base
 from sqlalchemy import pool
-from app.db.base import Base  # Import your database models
+from sqlalchemy import engine_from_config
+from alembic import context
+from logging.config import fileConfig
+from dotenv import load_dotenv  # Import the load_dotenv function
+
+# Load environment variables from .env file
+load_dotenv()
+
 
 # This is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -24,13 +29,15 @@ target_metadata = Base.metadata
 
 
 def get_url() -> str:
+
     user = os.getenv("MYSQL_USER")
     password = os.getenv("MYSQL_PASSWORD")
     server = os.getenv("MYSQL_SERVER")
     port = os.getenv("MYSQL_PORT")
     db = os.getenv("MYSQL_DB")
+    db_url = f"mysql+pymysql://{user}:{password}@{server}:{port}/{db}"
     # Use mysql+pymysql driver
-    return f"mysql+pymysql://{user}:{password}@{server}/{db}"
+    return db_url
 
 
 def run_migrations_offline() -> None:
